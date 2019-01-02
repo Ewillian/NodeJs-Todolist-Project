@@ -1,0 +1,38 @@
+doctype html
+html
+    head
+        title title
+        style
+           include ../css/bootstrap.min.css
+
+    body
+        h1 Bonjour #{name}
+        div( id = "Table")
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col") #
+                        th(scope="col") Message
+                        th(scope="col") Completion
+                        th(scope="col") UpdatedAt
+                        th(scope="col") CreatedAt
+                        th(scope="col") UserId
+                
+                tbody
+                    each item in todolist
+                        tr 
+                            td= item.id
+                            td= item.message
+                            td= item.completion
+                            td= item.updatedAt
+                            td= item.createdAt
+                            td= item.userId
+
+
+        div(class="Absolute-Center is-Responsive span6 mx-auto")
+            form(action='/todos/add' method='GET')
+                button(class="btn btn-primary" type='submit') Add
+            br
+            form(action='/todos' method='GET')
+                button(class="btn btn-primary" type='submit') Reset
+            br

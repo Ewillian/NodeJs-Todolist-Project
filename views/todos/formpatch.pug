@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        title form
+        style
+           include ../css/style.css
+           include ../css/bootstrap.min.css
+    body
+        div(class="container" id="moveme")
+            div(class="row")
+                div(class="Absolute-Center is-Responsive span6 mx-auto")
+                    h1 Bonjour #{name}
+                    form(action='/todos/' + usedid + '/?_method=PATCH', method="POST")
+                        div(class="form-group separate")
+                        label(for="Message User Input") Message
+                        input(type="hidden" name="_method" value="patch")
+                        input(type="text" name="newmessage" class="form-control" id="messageInput" value=todoslist.message) 
+                        div(class="form-check separate ")
+                            input(type="hidden" name="_method" value="patch")
+                            input(class="form-check-input" type="radio" name="newcompletion" id="TODO" value="TODO" checked=mycompletion)
+                            label(class="form-check-label" for="exampleRadios1" ) TODO
+                        div(class="form-check ")
+                            input(type="hidden" name="_method" value="patch")
+                            input(class="form-check-input" type="radio" name="newcompletion" id="DONE" value="DONE" checked=mycompletion1)
+                            label(class="form-check-label" for="exampleRadios1") DONE
+                        div(class="separate")
+                        <button type="submit" class="btn btn-primary">patch</button>

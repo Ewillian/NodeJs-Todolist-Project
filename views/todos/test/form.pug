@@ -1,0 +1,13 @@
+doctype html
+html
+    head
+        title form
+        style
+           include ../css/style.css
+           include ../css/bootstrap.min.css
+
+    body
+    form(action="/todos", method="post")
+        input(type="text", name="message")
+        input(type="text", name="completion")
+        input(type="submit", name="Done")

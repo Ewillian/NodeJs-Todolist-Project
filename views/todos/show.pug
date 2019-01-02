@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        title show
+        style
+           include ../css/bootstrap.min.css
+
+    body
+        h1 Bonjour #{name}
+        div( id = "Table")
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col") #
+                        th(scope="col") Message
+                        th(scope="col") Completion
+                        th(scope="col") UpdatedAt
+                        th(scope="col") CreatedAt
+                        th(scope="col") UserId
+                tbody
+                        tr 
+                            td= todolist.id
+                            td= todolist.message
+                            td= todolist.completion
+                            td= todolist.updatedAt
+                            td= todolist.createdAt
+                            td= todolist.userId
