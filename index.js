@@ -22,7 +22,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(methodOverride('_method'))
+
 app.use('/todos', require('./routes/todos'))
+app.use("/users", require('./routes/users'))
 
 app.listen(PORT);
 console.log("http://localhost:8080/")

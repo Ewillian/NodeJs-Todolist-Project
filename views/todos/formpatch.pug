@@ -10,7 +10,7 @@ html
             div(class="row")
                 div(class="Absolute-Center is-Responsive span6 mx-auto")
                     h1 Bonjour #{name}
-                    form(action='/todos/' + usedid + '/?_method=PATCH', method="POST")
+                    form(action='/todos/' +usedid+ '/?_method=PATCH', method="POST")
                         div(class="form-group separate")
                         label(for="Message User Input") Message
                         input(type="hidden" name="_method" value="patch")
@@ -24,4 +24,4 @@ html
                             input(class="form-check-input" type="radio" name="newcompletion" id="DONE" value="DONE" checked=mycompletion1)
                             label(class="form-check-label" for="exampleRadios1") DONE
                         div(class="separate")
-                        <button type="submit" class="btn btn-primary">patch</button>
+                        <button type="submit" class="btn btn-primary">patch</button>    

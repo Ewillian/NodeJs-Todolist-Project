@@ -1,5 +1,4 @@
 const moment = require('moment')
-const pug = require('pug');
 const router = require('express').Router()
 const Todos = require('./../models/todos')
 const _ = require('lodash')
@@ -75,7 +74,6 @@ router.post('/',(req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-    console.log(req.body.id)
     myargs.newcompletion = req.body.newcompletion
     myargs.newmessage = req.body.newmessage
     myargs.id = req.params.id

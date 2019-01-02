@@ -8,7 +8,7 @@ Also to see a table of users.
 
 ## Prerequisites
 
-* Bash [Unbuntu Windows](https://korben.info/installer-shell-bash-linux-windows-10.html)
+* Bash [Unbuntu Windows](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10)
 * Node (sudo apt install nodejs)
 * sudo apt install -g (Installation the necessary files)
 
