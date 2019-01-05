@@ -10,7 +10,7 @@ Also to see a table of users.
 
 * Bash [Unbuntu Windows](https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10)
 * Node (sudo apt install nodejs)
-* sudo apt install -g (Installation the necessary files)
+* sudo npm install -g (Installation the necessary files)
 
 ## Access (After installation)
 
