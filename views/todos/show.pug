@@ -6,7 +6,16 @@ html
            include ../css/bootstrap.min.css
 
     body
-        h1 Bonjour #{name}
+        container
+            h1 Bonjour #{name}
+            div(class="container-fluid d-inline")
+                div(class="row ml-2")
+                    form(action="/todos/add" method="GET")
+                        button(class="btn btn-outline-success" type="submit") Ajout
+                    form(method="GET" action="/users/"+myuserid+"/todos")
+                        button(class="btn btn-outline-success row ml-2" type="submit") Mes Todolist
+                    form(method="GET" action="/todos/add")
+                        button(class="btn btn-outline-success" type="submit") Rechercher
         div( id = "Table")
             table(class="table")
                 thead
@@ -17,6 +26,8 @@ html
                         th(scope="col") UpdatedAt
                         th(scope="col") CreatedAt
                         th(scope="col") UserId
+                        th(scope="col") Actions
+                        th(scope="col")
                 tbody
                         tr 
                             td= todolist.id
@@ -25,3 +36,9 @@ html
                             td= todolist.updatedAt
                             td= todolist.createdAt
                             td= todolist.userId
+                            td  
+                                form(action='/todos/' +todolist.id+ '/?_method=DELETE', method="POST" id="deleteForm")
+                                    button(class="btn btn-outline-danger" type="submit") Supprimer
+                            td
+                                form(action='/todos/'+todolist.id+ '/edit' method="GET" id="patchForm")
+                                    button(class="btn btn-outline-primary" type="submit") Modifier

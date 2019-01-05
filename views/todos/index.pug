@@ -6,8 +6,21 @@ html
            include ../css/bootstrap.min.css
 
     body
-        h1 Bonjour #{name}
-        div( id = "Table")
+        container
+            h1 Bonjour #{name}
+            div(class="container-fluid d-inline")
+                div(class="row ml-2")
+                    form(action="/todos/add" method="GET")
+                        button(class="btn btn-outline-success" type="submit") Ajout
+                    form(class="ml-2" method="GET" action="/users/"+myuserid+"/todos")
+                        button(class="btn btn-outline-success" type="submit") Mes Todolist
+                    form(class="ml-2" method="GET" action="/todos")
+                        button(class="btn btn-outline-success" type="submit") Todolists
+                    form(class="ml-2 form-inline" method="GET" id="myform" action="")
+                        input(name="RowId" class="form-control" placeholder="RowId" id="RowId")
+                        button(class="btn btn-outline-success ml-1" onclick="myFunction()") Rechercher
+
+        div(id="Table")
             table(class="table")
                 thead
                     tr
@@ -17,6 +30,8 @@ html
                         th(scope="col") UpdatedAt
                         th(scope="col") CreatedAt
                         th(scope="col") UserId
+                        th(scope="col") Actions
+                        th(scope="col")
                 
                 tbody
                     each item in todolist
@@ -27,12 +42,9 @@ html
                             td= item.updatedAt
                             td= item.createdAt
                             td= item.userId
-
-
-        div(class="Absolute-Center is-Responsive span6 mx-auto")
-            form(action='/todos/add' method='GET')
-                button(class="btn btn-primary" type='submit') Add
-            br
-            form(action='/todos' method='GET')
-                button(class="btn btn-primary" type='submit') Reset
-            br
+                            td
+                                form(action='/todos/' +item.id+ '/?_method=DELETE', method="POST" id="deleteForm")
+                                    button(class="btn btn-outline-danger" type="submit") Supprimer
+                            td
+                                form(action='/todos/'+item.id+ '/edit' method="GET" id="patchForm")
+                                    button(class="btn btn-outline-primary" type="submit") Modifier

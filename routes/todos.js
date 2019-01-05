@@ -3,8 +3,6 @@ const router = require('express').Router()
 const Todos = require('./../models/todos')
 const _ = require('lodash')
 
-var my404 = {status: "404 not found"}
-
 moment.locale();
 var update = moment().format('L');
 console.log(update)
@@ -15,15 +13,16 @@ router.get('/', (req, res) => {
         'text/html': function(){
             res.render('todos/index', {        
                 title: 'Select all',    
-                name: 'User',    
-                todolist: todos
+                name: 'User 1',    
+                todolist: todos,
+                myuserid : '1'
             })
         },
         'application/json': function(){
             res.send(todos);
         }
     })).catch((err) => {
-      return res.status(404).send(my404+err)
+      return res.status(404).send(err)
     })
 })
 
@@ -32,7 +31,7 @@ router.get('/add',(req, res) => {
         'text/html': function(){
             res.render('todos/form', {        
                 title: 'Formulaire ajout',
-                name: 'User'
+                name: 'User 1'
             })
     }})
 })
@@ -42,7 +41,7 @@ router.get('/:id',(req, res) => {
         'text/html': function(){
             res.render('todos/show', {        
                 title: 'Select One',    
-                name: 'User',    
+                name: 'User 1',    
                 todolist: todos
             })
         },
@@ -50,7 +49,7 @@ router.get('/:id',(req, res) => {
             res.send(todos);
         }
     })).catch((err) => {
-      return res.status(404).send(my404+err)
+      return res.status(404).send(err)
     })
 })
 
@@ -62,14 +61,14 @@ router.post('/',(req, res) => {
     Todos.postOne(myargs).then(() => {
         res.format({
             'application/json': function(){
-                res.send("{message : 'sucess'}");
+                res.send(JSON.stringify("{message : 'sucess'}"))
             },
             'text/html': function(){
                 res.redirect("/todos")
             }
         })
         }).catch((err) => {
-      return res.status(404).send(my404+err)
+      return res.status(404).send(err)
     })
 })
 
@@ -81,14 +80,14 @@ router.patch('/:id', (req, res) => {
     Todos.updateOne(myargs).then(() => {
         res.format({
             'application/json': function(){
-                res.send("{message : 'sucess'}");
+                res.send(JSON.stringify("{message : 'sucess'}"))
             },
             'text/html': function(){
                 res.redirect("/todos")
             }
         })
         }).catch((err) => {
-      return res.status(404).send(my404+err)
+      return res.status(404).send(err)
     })
     
 })
@@ -97,12 +96,14 @@ router.delete('/:id', (req,res) => {
     Todos.deleteRow(req.params.id).then(() => {
         res.format({
             'application/json': function(){
-                res.send("{message : 'sucess'}")
+                res.send(JSON.stringify("{message : 'sucess'}"))
+            },
+            'text/html': function(){
+                res.redirect("/todos")
             }
         })
-        res.redirect("/todos")
         }).catch((err) => {
-      return res.status(404).send(my404+err)
+      return res.status(404).send(err)
     })
 })
 
@@ -110,58 +111,34 @@ router.get('/:id/edit',(req, res) => {
     id = req.params.id
     Todos.findOne(id).then((todos) =>{
         if(todos.completion == "TODO"){
-            mc = true
-            mc1 = false
+            todo = true
+            done = false
+            doing = false
         }else if(todos.completion == "DONE"){
-            mc = false
-            mc1 = true
+            todo = false
+            done = true
+            done = false
+        }else if(todos.completion == "DOING"){
+            todo = false
+            done = false
+            doing = true
         }
         res.format({
             'text/html': function(){
                 res.render('todos/formpatch', {        
                     title: 'Formulaire Maj',    
-                    name: 'User',
-                    mycompletion: mc,
-                    mycompletion1: mc1,
+                    name: 'User 1',
+                    mycompletion: todo,
+                    mycompletion1: done,
+                    mycompletion2: doing,
                     todoslist: todos,
                     usedid : id
                 })
             }
         })
     }).catch((err) => {
-        return res.status(404).send(my404+err)
+        return res.status(404).send(err)
     })
-})
-
-router.get('/users/:id/todos',(req, res) => {
-    res.format({
-        'text/html': function(){
-            res.render('ressources/show', {        
-                title: 'Bonjour !',    
-                name: 'User',
-                todolist: todos,
-            })
-        }
-    })
-})
-
-router.use((req, res) => {
-    res.format({
-        'application/json': function(){
-            res.status(404)
-          },
-        'text/html': function(){
-            res.render('todos/index', {        
-                title: '404 !',    
-                name: '404',    
-            });
-          }
-    })
-})
-
-router.use((req, res) => {
-    res.status(404)
-    res.send('404 NOT FOUND')
 })
   
 module.exports = router

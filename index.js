@@ -28,3 +28,17 @@ app.use("/users", require('./routes/users'))
 
 app.listen(PORT);
 console.log("http://localhost:8080/")
+
+app.all('*', (req, res) => {
+    res.status(404);
+    res.format({
+        'application/json': function(){
+            res.send(JSON.stringify("{status : 404 not found}"))
+        },
+        'text/html': function(){
+            res.render('todos/404', {        
+            })
+        
+        }
+    })
+})
