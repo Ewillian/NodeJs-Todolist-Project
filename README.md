@@ -16,6 +16,7 @@ Also to see a table of users.
 
 * [LocalHost](http://localhost:8080/todos/)
 
-## Project's Member
+## Project's Members
 
 * LE COQ Guillaume
+* CHARRON Théo
